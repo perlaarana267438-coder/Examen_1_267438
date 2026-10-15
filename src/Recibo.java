@@ -3,7 +3,7 @@ public class Recibo {
     private double cobroComision;
     private String terminacionCuenta;
 
-    // Constructor para llenar el recibo con los datos al momento de retirar
+    //solo llena el recibo con los datos
     public Recibo(double montoRetirado, double cobroComision, String terminacionCuenta) {
         this.montoRetirado = montoRetirado;
         this.cobroComision = cobroComision;

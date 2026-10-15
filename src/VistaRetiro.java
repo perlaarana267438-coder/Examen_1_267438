@@ -7,12 +7,12 @@ public class VistaRetiro extends JFrame {
     private ControladorRetiro controlador;
     private double montoTemporal;
 
-    // Paneles principales
+    //paneles
     private JPanel panelDerecho;
     private JLabel lblTituloPrincipal;
     private JButton[] botonesMonto;
 
-    // Colores basados en tu Storyboard
+    //colores
     private final Color BLANCO = Color.WHITE;
     private final Color NEGRO = new Color(30, 30, 30);
     private final Color GRIS_CLARO = new Color(248, 248, 248);
@@ -22,7 +22,7 @@ public class VistaRetiro extends JFrame {
     private final Font FUENTE_BOTON = new Font("SansSerif", Font.BOLD, 14);
 
     public VistaRetiro() {
-        // Configuración de la ventana (Formato Horizontal como en el diseño)
+        //Ventana (con formato horizontal)
         setTitle("Cajero Automático");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,7 +30,7 @@ public class VistaRetiro extends JFrame {
         setLayout(new BorderLayout());
         getContentPane().setBackground(BLANCO);
 
-        // --- HEADER (Parte superior) ---
+        //header
         JPanel panelHeader = new JPanel(new BorderLayout());
         panelHeader.setBackground(BLANCO);
         panelHeader.setBorder(new EmptyBorder(20, 40, 20, 40));
@@ -46,23 +46,23 @@ public class VistaRetiro extends JFrame {
         panelHeader.add(lblSubtitulo, BorderLayout.EAST);
         add(panelHeader, BorderLayout.NORTH);
 
-        // --- CONTENEDOR CENTRAL (2 Columnas) ---
+        //contenedor 1
         JPanel panelCentral = new JPanel(new GridLayout(1, 2, 40, 0));
         panelCentral.setBackground(BLANCO);
         panelCentral.setBorder(new EmptyBorder(0, 40, 20, 40));
 
-        // Columna Izquierda: Montos
+        //columna izq (montos)
         JPanel panelIzquierdo = crearPanelMontos();
         panelCentral.add(panelIzquierdo);
 
-        // Columna Derecha: Dinámica (Cambia según el paso)
+        //columna der (esta es la dinamica)
         panelDerecho = new JPanel(new BorderLayout());
         panelDerecho.setBackground(BLANCO);
         panelCentral.add(panelDerecho);
 
         add(panelCentral, BorderLayout.CENTER);
 
-        // --- FOOTER (Parte inferior - Progreso) ---
+        //el footer
         JPanel panelFooter = new JPanel(new FlowLayout(FlowLayout.LEFT, 40, 10));
         panelFooter.setBackground(BLANCO);
         panelFooter.setBorder(new EmptyBorder(10, 40, 20, 40));
@@ -113,7 +113,6 @@ public class VistaRetiro extends JFrame {
             int finalI = i;
             btn.addActionListener(e -> {
                 resetearBotones();
-                // Estilo de botón seleccionado (Negro con texto blanco)
                 btn.setBackground(NEGRO);
                 btn.setForeground(BLANCO);
                 montoTemporal = Double.parseDouble(valorMonto);
@@ -134,12 +133,13 @@ public class VistaRetiro extends JFrame {
         }
     }
 
-    // --- PANTALLA 1: INICIO ---
+    //Pantallas
+    //de inicio
     public void mostrarMontos() {
         lblTituloPrincipal.setText("Selección de Monto");
         panelDerecho.removeAll();
 
-        // Logo de relleno para la derecha como en la imagen 1
+        //esto es solo relleno honestly
         JLabel lblLogoPlaceholder = new JLabel("BANCO", SwingConstants.CENTER);
         lblLogoPlaceholder.setForeground(Color.LIGHT_GRAY);
         lblLogoPlaceholder.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -149,12 +149,12 @@ public class VistaRetiro extends JFrame {
         setVisible(true);
     }
 
-    // --- PANTALLAS 2 Y 3: ESTADO DE CUENTA Y CONFIRMACIÓN ---
+    //estado de cuenta y confirmación
     public void actualizarEstadoCuenta(String datos) {
         lblTituloPrincipal.setText("Confirmación de Retiro");
         panelDerecho.removeAll();
 
-        // Tarjeta gris de estado de cuenta
+        //estado de cuenta
         JPanel tarjetaGris = new JPanel(new BorderLayout());
         tarjetaGris.setBackground(GRIS_CLARO);
         tarjetaGris.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -169,7 +169,7 @@ public class VistaRetiro extends JFrame {
         txtDatos.setFont(FUENTE_NORMAL);
         tarjetaGris.add(txtDatos, BorderLayout.CENTER);
 
-        // Botón grande negro de Retirar Efectivo
+        //retirar
         JButton btnRetirar = new JButton("Retirar Efectivo");
         btnRetirar.setFont(FUENTE_BOTON);
         btnRetirar.setBackground(NEGRO);
@@ -190,15 +190,15 @@ public class VistaRetiro extends JFrame {
         actualizarPantalla();
     }
 
-    // --- PANTALLA 4: RECIBO ---
+    //el RECIBOO
     public void mostrarPantallaRecibo(String datosRecibo) {
         lblTituloPrincipal.setText("Generación de Recibo");
         panelDerecho.removeAll();
 
-        // Desactivar botones de la izquierda
+        //desactiva los botones
         for(JButton btn : botonesMonto) { btn.setEnabled(false); }
 
-        // Crear la tarjeta de recibo en blanco con un borde fino
+        //target de recibo
         JPanel tarjetaRecibo = new JPanel(new BorderLayout());
         tarjetaRecibo.setBackground(BLANCO);
         tarjetaRecibo.setBorder(BorderFactory.createCompoundBorder(
@@ -221,7 +221,6 @@ public class VistaRetiro extends JFrame {
         lblGracias.setForeground(Color.GRAY);
         tarjetaRecibo.add(lblGracias, BorderLayout.SOUTH);
 
-        // Centramos el recibo en el panel derecho para que no ocupe
         JPanel contenedorRecibo = new JPanel(new GridBagLayout());
         contenedorRecibo.setBackground(BLANCO);
         contenedorRecibo.add(tarjetaRecibo);

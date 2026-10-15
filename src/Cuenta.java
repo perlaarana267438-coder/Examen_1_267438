@@ -3,7 +3,7 @@ public class Cuenta {
     private String nombreCliente;
     private double saldoActual;
 
-    // Constructor para ponerle datos de prueba a nuestra cuenta
+    //datos de prueba
     public Cuenta(String numeroCuenta, String nombreCliente, double saldoActual) {
         this.numeroCuenta = numeroCuenta;
         this.nombreCliente = nombreCliente;
@@ -18,12 +18,12 @@ public class Cuenta {
         double totalADescontar = monto + comision;
         if (saldoActual >= totalADescontar) {
             saldoActual = saldoActual - totalADescontar;
-            return true; // Retiro exitoso
+            return true; //retiro like
         }
-        return false; // Fondos insuficientes
+        return false; // retiro dislike (sin fondos)
     }
 
-    // Getters para usar los datos en el recibo
+    //los datos en el recibo
     public String getNumeroCuenta() {
         return numeroCuenta;
     }

@@ -4,53 +4,46 @@ public class ControladorRetiro {
     private VistaRetiro vista;
     private Cuenta cuentaActual;
 
-    // Constructor para conectar el controlador con la vista y la cuenta
+    //Esto conecta el controlador con la view y la cuentam
     public ControladorRetiro(VistaRetiro vista, Cuenta cuentaActual) {
         this.vista = vista;
         this.cuentaActual = cuentaActual;
     }
 
     public void iniciarRetiro() {
-        // Arranca el caso de uso
-        vista.mostrarMontos();
+        vista.mostrarMontos(); //aki se arranca el CU
     }
 
     public double calcularComision(double monto) {
-        // Supongamos que el banco cobra $15 pesos de comisión por cualquier retiro
-        return 15.0;
+        return 17.0; //la comisión que me cobran en el oxxo
     }
 
+    //obtener datos cuenta
     public void solicitarEstadoCuenta(double monto) {
-        // Paso 3 y 4 de tu diagrama: Obtener datos de la cuenta
         String datosCuenta = cuentaActual.obtenerDatos();
         double comision = calcularComision(monto);
 
         String mensaje = datosCuenta + "\nComisión por retiro: $" + comision;
 
-        // Paso 5: Mandar los datos a la vista para que los muestre
-        vista.actualizarEstadoCuenta(mensaje);
+        vista.actualizarEstadoCuenta(mensaje); //y este los manda a la view para mostrar los datos
     }
 
     public void confirmarRetiro(double monto) {
         double comision = calcularComision(monto);
 
-        // Paso 8 y 9: Intentar descontar el saldo
-        boolean exito = cuentaActual.descontarSaldo(monto, comision);
+        boolean exito = cuentaActual.descontarSaldo(monto, comision); //intenta descontar saldo
 
         if (exito) {
-            // Obtenemos los últimos 4 dígitos de la cuenta para el recibo
-            String numeroCompleto = cuentaActual.getNumeroCuenta();
+            String numeroCompleto = cuentaActual.getNumeroCuenta(); //se obtienen los digitos de la cuenta
             String terminacion = numeroCompleto.substring(numeroCompleto.length() - 4);
 
-            // Paso 10 y 11: Generar recibo
             Recibo nuevoRecibo = new Recibo(monto, comision, terminacion);
-            String textoRecibo = nuevoRecibo.generarTextoRecibo();
+            String textoRecibo = nuevoRecibo.generarTextoRecibo(); //se genera el recibo
 
-            // Paso 12: Mandar a mostrar el recibo en pantalla
-            vista.mostrarPantallaRecibo(textoRecibo);
+            vista.mostrarPantallaRecibo(textoRecibo); //y ya se muestra
         } else {
-            // Si no hay dinero suficiente
-            JOptionPane.showMessageDialog(null, "Error: Fondos insuficientes para realizar el retiro.", "Error", JOptionPane.ERROR_MESSAGE);
+            //por si no hay dinero suficiente
+            JOptionPane.showMessageDialog(null, "Error: fondos insuficientes", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
